@@ -1,0 +1,40 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Deadlock",
+        "description": "A behavior pack tool for Minecraft Bedrock utilizing the Gametest API ~ v1.0.0",
+        "uuid": "54edfea5-ab51-47ca-b992-724e255b5560",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 19, 30]
+    },
+    "metadata": {
+        "authors": ["Visual1mpact"],
+        "license": "GPLv3",
+        "url": "https://github.com/Visual1mpact/Deadlock"
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "d8395127-6923-4fb7-93d2-977cecd463e0",
+            "version": [1, 0, 0]
+        },
+        {
+            "description": "Deadlock Gametest Features",
+            "language": "javascript",
+            "type": "script",
+            "uuid": "1326c87b-37f3-4543-9f0f-0d03893134e1",
+            "version": [0, 0, 1],
+            "entry": "scripts/deadlock.js"
+        }
+    ],
+    "dependencies": [
+        {
+            "module_name": "mojang-minecraft",
+            "version": "1.0.0-beta"
+        },
+        {
+            "module_name": "mojang-gametest",
+            "version": "1.0.0-beta"
+        }
+    ]
+}
