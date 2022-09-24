@@ -5,13 +5,15 @@ import config from "../data/config";
 // Import all our commands
 import { give } from "./Utility/give";
 import { op } from "./Moderation/op";
-import { prefix } from "./Moderation/prefix";
+import { prefix } from "./Moderation/prefix.js";
+import { deop } from "./Moderation/deop.js";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
         give: give,
         op: op,
         prefix: prefix,
+        deop: deop,
     },
     null
 );
@@ -81,6 +83,7 @@ function command(object: BeforeChatEvent) {
             return (object.cancel = true);
         } else if (hash === encode && args[0] === config.permission.password) {
             sender.tell(`You have permission to use Deadlock.`);
+            return (object.cancel = true);
         }
     }
 
