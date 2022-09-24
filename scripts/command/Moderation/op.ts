@@ -12,33 +12,6 @@ export function op(message: BeforeChatEvent, args: string[]) {
 
     const player = message.sender;
 
-    // Check for hash/salt and validate password
-    let hash = player.getDynamicProperty("hash");
-    let salt = player.getDynamicProperty("salt");
-    let encode: string = undefined;
-    // If no salt then create one
-    if (salt === undefined && args[0] === config.permission.password) {
-        player.setDynamicProperty("salt", UUID.generate());
-        salt = player.getDynamicProperty("salt");
-    }
-    // If no hash then create one
-    if (hash === undefined && args[0] === config.permission.password) {
-        encode = crypto(salt, config.permission.password);
-        player.setDynamicProperty("hash", encode);
-        hash = player.getDynamicProperty("hash");
-    } else {
-        try {
-            encode = crypto(salt, config.permission.password);
-        } catch (error) {}
-    }
-    // Make sure the user has permissions to run the command
-    if (hash === undefined || config.permission.password === "PutPasswordHere" || (hash !== encode && args[0] !== config.permission.password)) {
-        return player.tell(`You do not have permission to use this command.`);
-    } else if (hash === encode && args[0] === config.permission.password) {
-        player.tell(`You have permission to use Deadlock.`);
-        return;
-    }
-
     // Are there arguements
     if (!args.length) {
         return void 0;

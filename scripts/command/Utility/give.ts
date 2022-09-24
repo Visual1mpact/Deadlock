@@ -1,7 +1,6 @@
 import { BeforeChatEvent, EntityInventoryComponent, Player, world, MinecraftItemTypes, ItemStack } from "mojang-minecraft";
 import maxItemStack, { defaultMaxItemStack } from "../../data/maxstack.js";
-import config from "../../data/config.js";
-import { crypto, toCamelCase } from "../../util.js";
+import { toCamelCase } from "../../util.js";
 
 /**
  * @name give
@@ -12,18 +11,6 @@ export function give(message: BeforeChatEvent, args: string[]) {
     message.cancel = true;
 
     const player = message.sender;
-
-    // Check for hash/salt and validate password
-    const hash = player.getDynamicProperty("hash");
-    const salt = player.getDynamicProperty("salt");
-    let encode: string = undefined;
-    try {
-        encode = crypto(salt, config.permission.password);
-    } catch (error) {}
-    // make sure the user has permissions to run the command
-    if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
-        return player.tell(`You do not have permission to use this command.`);
-    }
 
     // Are there arguements
     if (!args.length) {

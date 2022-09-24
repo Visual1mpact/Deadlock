@@ -12,7 +12,7 @@ function registry(object: WorldInitializeEvent) {
      * Set property third
      */
 
-    // Prefix
+    // Default Prefix
     worldProperty.defineString("prefix", 1);
 
     // Debug
@@ -23,6 +23,9 @@ function registry(object: WorldInitializeEvent) {
 
     // Salt
     entityProperty.defineString("salt", 200);
+
+    // Private Prefix
+    entityProperty.defineString("privatePrefix", 1);
 
     // Register Defined properties in world globally
     object.propertyRegistry.registerWorldDynamicProperties(worldProperty);

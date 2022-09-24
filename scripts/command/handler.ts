@@ -1,4 +1,6 @@
-import { BeforeChatEvent, world } from "mojang-minecraft";
+import { BeforeChatEvent, Player, world } from "mojang-minecraft";
+import { crypto, UUID } from "../util";
+import config from "../data/config";
 
 // Import all our commands
 import { give } from "./Utility/give";
@@ -21,7 +23,10 @@ function command(object: BeforeChatEvent) {
     const { sender, message } = object;
 
     // Get prefix from player
-    const prefix = String(world.getDynamicProperty("prefix"));
+    let prefix = String(sender.getDynamicProperty("privatePrefix"));
+    if (prefix === "undefined") {
+        prefix = String(world.getDynamicProperty("prefix"));
+    }
 
     // Checks if the message starts with our prefix and if not then exit
     if (!message.startsWith(prefix)) {
@@ -46,6 +51,47 @@ function command(object: BeforeChatEvent) {
     if (!(commandName in commandDefinitions)) {
         sender.tell(`The command ${prefix}${commandName} does not exist. Try again!`);
         return (object.cancel = true);
+    }
+
+    let hash = sender.getDynamicProperty("hash");
+    let salt = sender.getDynamicProperty("salt");
+    let encode: string = undefined;
+    if (commandName !== "op") {
+        // Check for hash/salt and validate password
+        try {
+            encode = crypto(salt, config.permission.password);
+        } catch (error) {}
+        // make sure the user has permissions to run the command
+        if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
+            sender.tell(`You do not have permission to use this command.`);
+            return (object.cancel = true);
+        }
+    }
+
+    // OP Status
+    if (commandName === "op") {
+        // If no salt then create one
+        if (salt === undefined && args[0] === config.permission.password) {
+            sender.setDynamicProperty("salt", UUID.generate());
+            salt = sender.getDynamicProperty("salt");
+        }
+        // If no hash then create one
+        if (hash === undefined && args[0] === config.permission.password) {
+            encode = crypto(salt, config.permission.password);
+            sender.setDynamicProperty("hash", encode);
+            hash = sender.getDynamicProperty("hash");
+        } else {
+            try {
+                encode = crypto(salt, config.permission.password);
+            } catch (error) {}
+        }
+        // Make sure the user has permissions to run the command
+        if (hash === undefined || config.permission.password === "PutPasswordHere" || (hash !== encode && args[0] !== config.permission.password)) {
+            sender.tell(`You do not have permission to use this command.`);
+            return (object.cancel = true);
+        } else if (hash === encode && args[0] === config.permission.password) {
+            sender.tell(`You have permission to use Deadlock.`);
+        }
     }
 
     // Command exists so call it and return
