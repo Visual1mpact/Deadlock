@@ -5,11 +5,13 @@ import config from "../data/config";
 // Import all our commands
 import { give } from "./Utility/give";
 import { op } from "./Moderation/op";
+import { prefix } from "./Moderation/prefix";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
         give: give,
         op: op,
+        prefix: prefix,
     },
     null
 );
@@ -56,18 +58,6 @@ function command(object: BeforeChatEvent) {
     let hash = sender.getDynamicProperty("hash");
     let salt = sender.getDynamicProperty("salt");
     let encode: string = undefined;
-    if (commandName !== "op") {
-        // Check for hash/salt and validate password
-        try {
-            encode = crypto(salt, config.permission.password);
-        } catch (error) {}
-        // make sure the user has permissions to run the command
-        if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
-            sender.tell(`You do not have permission to use this command.`);
-            return (object.cancel = true);
-        }
-    }
-
     // OP Status
     if (commandName === "op") {
         // If no salt then create one
@@ -91,6 +81,18 @@ function command(object: BeforeChatEvent) {
             return (object.cancel = true);
         } else if (hash === encode && args[0] === config.permission.password) {
             sender.tell(`You have permission to use Deadlock.`);
+        }
+    }
+
+    if (commandName !== "op") {
+        // Check for hash/salt and validate password
+        try {
+            encode = crypto(salt, config.permission.password);
+        } catch (error) {}
+        // make sure the user has permissions to run the command
+        if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
+            sender.tell(`You do not have permission to use this command.`);
+            return (object.cancel = true);
         }
     }
 

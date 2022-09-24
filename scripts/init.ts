@@ -19,10 +19,10 @@ function registry(object: WorldInitializeEvent) {
     worldProperty.defineBoolean("debug");
 
     // Hash
-    entityProperty.defineString("hash", 200);
+    entityProperty.defineString("hash", 45);
 
     // Salt
-    entityProperty.defineString("salt", 200);
+    entityProperty.defineString("salt", 45);
 
     // Private Prefix
     entityProperty.defineString("privatePrefix", 1);
