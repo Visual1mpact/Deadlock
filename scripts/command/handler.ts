@@ -1,4 +1,4 @@
-import { BeforeChatEvent, Player, world } from "mojang-minecraft";
+import { BeforeChatEvent, world } from "mojang-minecraft";
 import { crypto, UUID } from "../util";
 import config from "../data/config";
 
