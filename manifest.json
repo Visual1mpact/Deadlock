@@ -3,7 +3,7 @@
     "header": {
         "name": "Deadlock",
         "description": "A behavior pack tool for Minecraft Bedrock utilizing the Gametest API ~ v1.0.0",
-        "uuid": "54edfea5-ab51-47ca-b992-724e255b5560",
+        "uuid": "3de056b2-3a44-4502-ad87-40443316fe47",
         "version": [1, 0, 0],
         "min_engine_version": [1, 19, 30]
     },
@@ -15,7 +15,7 @@
     "modules": [
         {
             "type": "data",
-            "uuid": "d8395127-6923-4fb7-93d2-977cecd463e0",
+            "uuid": "0812e144-e95f-41cc-8d4a-bd4a429f9685",
             "version": [1, 0, 0]
         },
         {
@@ -23,7 +23,7 @@
             "language": "javascript",
             "type": "script",
             "uuid": "1326c87b-37f3-4543-9f0f-0d03893134e1",
-            "version": [0, 0, 1],
+            "version": [1, 0, 0],
             "entry": "scripts/deadlock.js"
         }
     ],
