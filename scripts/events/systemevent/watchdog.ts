@@ -1,4 +1,3 @@
-// @ts-ignore
 import { BeforeWatchdogTerminateEvent, system } from "mojang-minecraft";
 
 function watchdog(terminator: BeforeWatchdogTerminateEvent) {
