@@ -7,6 +7,7 @@ import { give } from "./Utility/give";
 import { op } from "./Moderation/op";
 import { prefix } from "./Moderation/prefix.js";
 import { deop } from "./Moderation/deop.js";
+import { tpa } from "./Utility/tpa";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -14,6 +15,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         op: op,
         prefix: prefix,
         deop: deop,
+        tpa: tpa,
     },
     null
 );
