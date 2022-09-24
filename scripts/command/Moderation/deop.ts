@@ -47,5 +47,5 @@ export function deop(message: BeforeChatEvent, args: string[]) {
         player.tell(`${member.name} had permissions removed from Deadlock.`);
         return member.tell(`Permissions for Deadlock are revoked.`);
     }
-    return player.tell(`${member.nameTag} never had permission to use Deadlock.`);
+    return player.tell(`${member.name} never had permission to use Deadlock.`);
 }
