@@ -1,5 +1,3 @@
-/* eslint no-var: "off"*/
-/* eslint no-redeclare: "off"*/
 import { BeforeChatEvent, Player, world } from "mojang-minecraft";
 import config from "../../data/config.js";
 import { crypto } from "../../util.js";
