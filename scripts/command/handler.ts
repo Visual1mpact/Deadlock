@@ -10,6 +10,7 @@ import { deop } from "./Moderation/deop.js";
 import { tpa } from "./Utility/tpa.js";
 import { sethome } from "./Utility/sethome.js";
 import { delhome } from "./Utility/delhome";
+import { gohome } from "./Utility/gohome";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -20,6 +21,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         tpa: tpa,
         sethome: sethome,
         delhome: delhome,
+        gohome: gohome,
     },
     null
 );
