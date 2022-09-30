@@ -40,7 +40,7 @@ export function gohome(message: BeforeChatEvent, args: string[]) {
 
     // Don't allow spaces
     if (args.length > 1) {
-        player.tell(`No spaces in names please.`);
+        player.tell(`§2[§7Deadlock§2]§r No spaces in names please.`);
         return void 0;
     }
 
@@ -87,7 +87,7 @@ export function gohome(message: BeforeChatEvent, args: string[]) {
                     const pz: number = Number(Base64.decode(divider[3]));
                     const pd: string = Base64.decode(divider[4]);
                     player.teleport(new Location(px, py, pz), world.getDimension(pd), 0, 0);
-                    player.tell(`Welcome back!`);
+                    player.tell(`§2[§7Deadlock§2]§r Welcome back!`);
                     verify = true;
                     break;
                 }
@@ -95,7 +95,7 @@ export function gohome(message: BeforeChatEvent, args: string[]) {
         }
         if (!verify) {
             // If we reached this point then it doesn't exist
-            return player.tell(`Home '${homeSetting}' does not exist.`);
+            return player.tell(`§2[§7Deadlock§2]§r Home '${homeSetting}' does not exist.`);
         }
         // Delete old key and value
         cooldownTimer.delete(player);
@@ -103,6 +103,6 @@ export function gohome(message: BeforeChatEvent, args: string[]) {
         cooldownTimer.set(player, new Date().getTime());
     } else {
         // Teleporting to fast
-        player.tell(`Too fast! Please wait for ${activeTimer} before teleporting home.`);
+        player.tell(`§2[§7Deadlock§2]§r Please wait ${activeTimer} before teleporting home.`);
     }
 }

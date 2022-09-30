@@ -28,7 +28,7 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     }
 
     if (!member) {
-        return player.tell(`Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
     }
 
     // Check for hash/salt and validate password from member
@@ -42,8 +42,8 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     if (memberHash !== undefined && memberHash === memberEncode) {
         member.removeDynamicProperty("hash");
         member.removeDynamicProperty("salt");
-        player.tell(`${member.name} had permissions removed from Deadlock.`);
-        return member.tell(`Permissions for Deadlock are revoked.`);
+        player.tell(`§2[§7Deadlock§2]§r ${member.name} had permissions removed from Deadlock.`);
+        return member.tell(`§2[§7Deadlock§2]§r Permissions for Deadlock are revoked.`);
     }
-    return player.tell(`${member.name} never had permission to use Deadlock.`);
+    return player.tell(`§2[§7Deadlock§2]§r ${member.name} never had permission to use Deadlock.`);
 }

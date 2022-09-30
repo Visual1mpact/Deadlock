@@ -32,7 +32,7 @@ export function tpa(message: BeforeChatEvent, args: string[]) {
     }
     // Are they online?
     if (!member) {
-        return player.tell(`Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
     }
 
     // Check if teleporting to them or vice versa then set it up
@@ -40,9 +40,9 @@ export function tpa(message: BeforeChatEvent, args: string[]) {
         // Let's teleport you to that player
         artificalPlayer.teleport(member.location, member.dimension, 0, 0);
         // Let you know that you have been teleported
-        return player.tell(`Teleported ${artificalPlayer.name} to ${member.name}`);
+        return player.tell(`§2[§7Deadlock§2]§r Teleported ${artificalPlayer.name} to ${member.name}`);
     } else {
         // Need to specify from and where
-        return player.tell(`You forgot to mention 'from' and 'where' to teleport.`);
+        return player.tell(`§2[§7Deadlock§2]§r You forgot to mention 'from' and 'where' to teleport.`);
     }
 }
