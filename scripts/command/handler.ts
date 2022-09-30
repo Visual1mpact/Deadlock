@@ -3,15 +3,16 @@ import { crypto, UUID } from "../util";
 import config from "../data/config";
 
 // Import all our commands
-import { give } from "./Utility/give";
-import { op } from "./Moderation/op";
+import { give } from "./Utility/give.js";
+import { op } from "./Moderation/op.js";
 import { prefix } from "./Moderation/prefix.js";
 import { deop } from "./Moderation/deop.js";
 import { tpa } from "./Utility/tpa.js";
 import { sethome } from "./Utility/sethome.js";
-import { delhome } from "./Utility/delhome";
-import { gohome } from "./Utility/gohome";
-import { listhome } from "./Utility/listhome";
+import { delhome } from "./Utility/delhome.js";
+import { gohome } from "./Utility/gohome.js";
+import { listhome } from "./Utility/listhome.js";
+import { invsee } from "./Utility/invsee.js";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -24,6 +25,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         delhome: delhome,
         gohome: gohome,
         listhome: listhome,
+        invsee: invsee,
     },
     null
 );
