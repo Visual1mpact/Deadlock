@@ -18,7 +18,8 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
 
     // Don't allow spaces
     if (args.length > 1 || args[0].trim().length === 0) {
-        player.tell(`No spaces in names please!`);
+        player.tell(`No spaces in names please.`);
+        return void 0;
     }
 
     // Get current location
@@ -45,7 +46,7 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
         b64CD = Base64.encode(currentDimension);
     }
     if (player.dimension.id === "minecraft:the_end") {
-        return player.tell(`Not allowed to set home in this dimension!`);
+        return player.tell(`Not allowed to set home in this dimension.`);
     }
 
     const homeSetting = args[0];
@@ -66,14 +67,14 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
             const home: string = Base64.decode(divider[0]);
             if (home === homeSetting) {
                 verify = true;
-                player.tell(`Home with name '${homeSetting}' already exists!`);
+                player.tell(`Home with name '${homeSetting}' already exists.`);
                 break;
             }
             counter = ++counter;
         }
         if (counter >= 5) {
             verify = true;
-            player.tell(`You can only have 5 saved locations at a time!`);
+            player.tell(`You can only have 5 saved locations at a time.`);
             break;
         }
     }
@@ -85,5 +86,5 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
     // Store their new home coordinates
     player.addTag(b64PS);
 
-    player.tell(`Home '${homeSetting}' has been set at ${homex} ${homey} ${homez}!`);
+    player.tell(`Home '${homeSetting}' has been set at ${homex} ${homey} ${homez}.`);
 }

@@ -9,6 +9,7 @@ import { prefix } from "./Moderation/prefix.js";
 import { deop } from "./Moderation/deop.js";
 import { tpa } from "./Utility/tpa.js";
 import { sethome } from "./Utility/sethome.js";
+import { delhome } from "./Utility/delhome";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -18,6 +19,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         deop: deop,
         tpa: tpa,
         sethome: sethome,
+        delhome: delhome,
     },
     null
 );
