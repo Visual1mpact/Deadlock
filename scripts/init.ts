@@ -18,6 +18,9 @@ function registry(object: WorldInitializeEvent) {
     // Debug
     worldProperty.defineBoolean("debug");
 
+    // Vanish
+    entityProperty.defineBoolean("vanish");
+
     // Hash
     entityProperty.defineString("hash", 45);
 
