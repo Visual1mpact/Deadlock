@@ -20,7 +20,8 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     // try to find the player requested
     let member: Player;
     if (args.length) {
-        for (const pl of world.getPlayers()) {
+        let pl: Player = undefined;
+        for (pl of world.getPlayers()) {
             if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }

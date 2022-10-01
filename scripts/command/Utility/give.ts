@@ -20,7 +20,8 @@ export function give(message: BeforeChatEvent, args: string[]) {
     // Try to find the player requested
     let member: Player = undefined;
     if (args.length) {
-        for (const pl of world.getPlayers()) {
+        let pl: Player = undefined;
+        for (pl of world.getPlayers()) {
             if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }
@@ -41,7 +42,8 @@ export function give(message: BeforeChatEvent, args: string[]) {
      */
     let confirmItem = false;
     const itemStringConvert = toCamelCase(args[1]);
-    for (const itemValidate in MinecraftItemTypes) {
+    let itemValidate: string = undefined;
+    for (itemValidate in MinecraftItemTypes) {
         if (itemStringConvert === itemValidate) {
             confirmItem = true;
             break;

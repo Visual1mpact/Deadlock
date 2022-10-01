@@ -27,7 +27,8 @@ export function delhome(message: BeforeChatEvent, args: string[]) {
     let divider: string[] = undefined;
     const homeSetting = args[0];
     let tags = player.getTags();
-    for (let i = tags.length - 1; i >= 0; i--) {
+    let i = tags.length - 1;
+    for (; i >= 0; --i) {
         if (tags[i].startsWith("Deadlock-")) {
             let base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
             divider = base64Integrity.split("-");

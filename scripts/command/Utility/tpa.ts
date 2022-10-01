@@ -19,7 +19,8 @@ export function tpa(message: BeforeChatEvent, args: string[]) {
     let member: Player;
 
     // Try to find the player requested
-    for (const pl of world.getPlayers()) {
+    let pl: Player = undefined;
+    for (pl of world.getPlayers()) {
         if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {
             artificalPlayer = pl;
         }

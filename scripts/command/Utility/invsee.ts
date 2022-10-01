@@ -17,7 +17,8 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
 
     // Try to find the player requested
     let member: Player;
-    for (const pl of world.getPlayers()) {
+    let pl: Player = undefined;
+    for (pl of world.getPlayers()) {
         if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {
             member = pl;
         }
@@ -31,7 +32,8 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
     let container = inv.container;
 
     player.tell(`§2[§7Deadlock§2]§r ${member.name}'s inventory:`);
-    for (let i = 0; i < container.size; i++) {
+    let i = 0;
+    for (; i < container.size; ++i) {
         const item = container.getItem(i);
         player.tell(` | §fSlot ${i}§r §7=>§r ${item ? `§2[§f${item.id.replace("minecraft:", "")}§2]§r §7Amount: §7x${item.amount}§r §7=>§r §2[§fData ${item.data}§2]§r` : "§2(§7empty§2)§r"}`);
     }

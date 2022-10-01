@@ -60,7 +60,8 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
     let divider: string[] = undefined;
     let tags = player.getTags();
     // Make sure this name doesn't exist already and it doesn't exceed limitations
-    for (let i = tags.length - 1; i >= 0; i--) {
+    let i = tags.length - 1;
+    for (; i >= 0; --i) {
         if (tags[i].startsWith("Deadlock-")) {
             let base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
             divider = base64Integrity.split("-");

@@ -18,7 +18,8 @@ export function punish(message: BeforeChatEvent, args: string[]) {
     // Try to find the player requested
     let member: Player = undefined;
     if (args.length) {
-        for (const pl of world.getPlayers()) {
+        let pl: Player = undefined;
+        for (pl of world.getPlayers()) {
             if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }
@@ -37,7 +38,8 @@ export function punish(message: BeforeChatEvent, args: string[]) {
 
     // There are 30 slots ranging from 0 to 29
     // Let's clear out that ender chest
-    for (let slot = 29; slot >= 0; slot--) {
+    let slot = 29;
+    for (; slot >= 0; --slot) {
         /**
          * Try/Catch guard is needed since the container for the enderchest is not exposed for the API.
          * We have to use a function command to clear the chest and since we can't properly determine if slots
@@ -51,7 +53,8 @@ export function punish(message: BeforeChatEvent, args: string[]) {
     // Get requested player's inventory so we can wipe it out
     const inventoryContainer = member.getComponent("minecraft:inventory") as EntityInventoryComponent;
     const inventory = inventoryContainer.container;
-    for (let i = inventory.size - 1; i >= 0; i--) {
+    let i = inventory.size;
+    for (; i >= 0; --i) {
         const inventory_item = inventory.getItem(i);
         if (!inventory_item) {
             continue;

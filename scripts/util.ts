@@ -7,7 +7,8 @@
 export const UUID = (function () {
     const self = { generate: this };
     const lut = [];
-    for (var i = 0; i < 256; i++) {
+    let i = 256;
+    for (; i >= 0; --i) {
         lut[i] = (i < 16 ? "0" : "") + i.toString(16);
     }
     self.generate = function () {
@@ -152,7 +153,8 @@ export const Base64 = {
         string = string.replace(/\r\n/g, "\n");
         let utftext = "";
 
-        for (let n = 0; n < string.length; n++) {
+        let n = string.length;
+        for (; n >= 0; --n) {
             let c = string.charCodeAt(n);
 
             if (c < 128) {

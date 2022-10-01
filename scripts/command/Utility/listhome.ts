@@ -14,7 +14,8 @@ export function listhome(message: BeforeChatEvent) {
     let verify = false;
     let tags = player.getTags();
     player.tell(`§l§2[§7List Of Homes§2]§r`);
-    for (let i = tags.length - 1; i >= 0; i--) {
+    let i = tags.length - 1;
+    for (; i >= 0; --i) {
         if (tags[i].startsWith("Deadlock-")) {
             const base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
             divider = base64Integrity.split("-");
