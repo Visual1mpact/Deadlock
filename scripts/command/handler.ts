@@ -14,6 +14,7 @@ import { gohome } from "./Utility/gohome.js";
 import { listhome } from "./Utility/listhome.js";
 import { invsee } from "./Utility/invsee.js";
 import { ecwipe } from "./Utility/ecwipe.js";
+import { punish } from "./Utility/punish.js";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -28,6 +29,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         listhome: listhome,
         invsee: invsee,
         ecwipe: ecwipe,
+        punish: punish,
     },
     null
 );
