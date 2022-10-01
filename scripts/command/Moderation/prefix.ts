@@ -1,4 +1,4 @@
-import { BeforeChatEvent } from "mojang-minecraft";
+import { BeforeChatEvent, world } from "mojang-minecraft";
 
 /**
  * @name prefix
@@ -20,7 +20,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
 
     // Reset prefix
     if (argcheck === true && player.getDynamicProperty("privatePrefix") !== undefined) {
-        player.removeDynamicProperty("privatePrefix");
+        player.setDynamicProperty("privatePrefix", world.getDynamicProperty("prefix"));
         return;
     }
 
