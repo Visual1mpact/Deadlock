@@ -15,8 +15,8 @@ export function tpa(message: BeforeChatEvent, args: string[]) {
         return void 0;
     }
 
-    let artificalPlayer: Player;
-    let member: Player;
+    let artificalPlayer: Player = undefined;
+    let member: Player = undefined;
 
     // Try to find the player requested
     let pl: Player = undefined;

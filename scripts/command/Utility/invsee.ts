@@ -16,7 +16,7 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
     }
 
     // Try to find the player requested
-    let member: Player;
+    let member: Player = undefined;
     let pl: Player = undefined;
     for (pl of world.getPlayers()) {
         if (pl.nameTag.toLowerCase().includes(args[0].toLowerCase().replace(/"|\\|@/g, ""))) {

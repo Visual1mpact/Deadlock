@@ -18,7 +18,7 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     }
 
     // try to find the player requested
-    let member: Player;
+    let member: Player = undefined;
     if (args.length) {
         let pl: Player = undefined;
         for (pl of world.getPlayers()) {
