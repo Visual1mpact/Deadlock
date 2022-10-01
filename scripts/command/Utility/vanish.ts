@@ -21,7 +21,7 @@ export function vanish(message: BeforeChatEvent) {
     }
 
     // Enable
-    if (player.hasTag("vanish") === false && player.getDynamicProperty("vanish") === false) {
+    if (player.hasTag("vanish") === false && (player.getDynamicProperty("vanish") === false || player.getDynamicProperty("vanish") === undefined)) {
         player.setDynamicProperty("vanish", true);
         player.addTag("vanish");
         player.triggerEvent("vanish");
@@ -29,7 +29,10 @@ export function vanish(message: BeforeChatEvent) {
     }
 
     // Did something go wrong? Fix it.
-    if ((player.hasTag("vanish") === true && player.getDynamicProperty("vanish") === false) || (!player.hasTag("vanish") === false && player.getDynamicProperty("vanish") === true)) {
+    if (
+        (player.hasTag("vanish") === true && (player.getDynamicProperty("vanish") === false || player.getDynamicProperty("vanish") === undefined)) ||
+        (!player.hasTag("vanish") === false && (player.getDynamicProperty("vanish") === true || player.getDynamicProperty("vanish") === undefined))
+    ) {
         player.setDynamicProperty("vanish", false);
         player.removeTag("vanish");
         player.triggerEvent("unvanish");
