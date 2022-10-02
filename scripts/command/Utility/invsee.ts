@@ -25,7 +25,7 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
     }
 
     if (!member) {
-        return player.tell(`Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§f Couldn't find that player!`);
     }
 
     let inv = member.getComponent("inventory") as EntityInventoryComponent;
