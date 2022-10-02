@@ -17,6 +17,7 @@ import { ecwipe } from "./Utility/ecwipe.js";
 import { punish } from "./Utility/punish.js";
 import { vanish } from "./Utility/vanish.js";
 import { tiny } from "./Utility/tiny.js";
+import { debug } from "./Utility/debug";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -34,6 +35,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         punish: punish,
         vanish: vanish,
         tiny: tiny,
+        debug: debug,
     },
     null
 );
