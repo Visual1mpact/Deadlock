@@ -13,6 +13,7 @@ function vanish() {
             if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
                 player.runCommand(`effect @s clear`);
             }
+            player.triggerEvent("unvanish");
             player.tell(`§2[§7Deadlock§2]§r You had unauthorized permissions for Vanish.`);
             continue;
         }
