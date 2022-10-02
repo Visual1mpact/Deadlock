@@ -152,9 +152,9 @@ export const Base64 = {
     _utf8_encode: function (string: string) {
         string = string.replace(/\r\n/g, "\n");
         let utftext = "";
+        let n = 0;
 
-        let n = string.length;
-        for (; n >= 0; --n) {
+        for (; n < string.length; n++) {
             let c = string.charCodeAt(n);
 
             if (c < 128) {
