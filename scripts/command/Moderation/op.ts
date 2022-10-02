@@ -29,7 +29,7 @@ export function op(message: BeforeChatEvent, args: string[]) {
     }
 
     if (!member) {
-        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§f Couldn't find that player!`);
     }
 
     // Check for hash/salt and validate password
@@ -44,5 +44,5 @@ export function op(message: BeforeChatEvent, args: string[]) {
         const encode = crypto(memberSalt, config.permission.password);
         member.setDynamicProperty("hash", encode);
     }
-    member.tell(`§2[§7Deadlock§2]§r You have permission to use Deadlock.`);
+    member.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
 }

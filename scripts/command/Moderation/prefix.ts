@@ -25,14 +25,14 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
     }
 
     if (args[0][0] == "/") {
-        return player.tell(`§2[§7Deadlock§2]§r Using prefix '/' is not allowed! Please try another one.`);
+        return player.tell(`§2[§7Deadlock§2]§f Using prefix '/' is not allowed! Please try another one.`);
     }
 
     // Change Prefix command under conditions
     if (args[0].length <= 1 && args[0].length >= 1) {
-        player.tell(`§2[§7Deadlock§2]§r Prefix has been changed to '${args[0]}'.`);
+        player.tell(`§2[§7Deadlock§2]§f Prefix has been changed to '${args[0]}'.`);
         return player.setDynamicProperty("privatePrefix", args[0]);
     } else {
-        player.tell(`§2[§7Deadlock§2]§r Prefix length cannot be more than 1 character.`);
+        player.tell(`§2[§7Deadlock§2]§f Prefix length cannot be more than 1 character.`);
     }
 }

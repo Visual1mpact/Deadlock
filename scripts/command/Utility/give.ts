@@ -30,7 +30,7 @@ export function give(message: BeforeChatEvent, args: string[]) {
 
     // Are they online?
     if (!member) {
-        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§f Couldn't find that player!`);
     }
 
     /**
@@ -68,11 +68,11 @@ export function give(message: BeforeChatEvent, args: string[]) {
             const inv = invContainer.container;
             const item = new ItemStack(MinecraftItemTypes[itemStringConvert], Number(args[2]), Number(args[3]));
             inv.addItem(item);
-            return player.tell(`§2[§7Deadlock§2]§r ${member.name} was given ${args[1]} x${args[2]}.`);
+            return player.tell(`§2[§7Deadlock§2]§f ${member.name} was given ${args[1]} x${args[2]}.`);
         } else {
-            return player.tell(`§2[§7Deadlock§2]§r This stack is too high! ${maxStack} is the max. Try again.`);
+            return player.tell(`§2[§7Deadlock§2]§f This stack is too high! ${maxStack} is the max. Try again.`);
         }
     } else {
-        return player.tell(`§2[§7Deadlock§2]§r This item could not be found! Try again.`);
+        return player.tell(`§2[§7Deadlock§2]§f This item could not be found! Try again.`);
     }
 }

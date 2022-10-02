@@ -75,7 +75,7 @@ function command(object: BeforeChatEvent) {
 
     // Let player know if command does not exist and return
     if (!(commandName in commandDefinitions)) {
-        sender.tell(`§2[§7Deadlock§2]§r The command ${prefix}${commandName} does not exist. Try again!`);
+        sender.tell(`§2[§7Deadlock§2]§f The command ${prefix}${commandName} does not exist. Try again!`);
         return (object.cancel = true);
     }
 
@@ -101,10 +101,10 @@ function command(object: BeforeChatEvent) {
         }
         // Make sure the user has permissions to run the command
         if (hash === undefined || config.permission.password === "PutPasswordHere" || (hash !== encode && args[0] !== config.permission.password)) {
-            sender.tell(`§2[§7Deadlock§2]§r You do not have permission to use this command.`);
+            sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
             return (object.cancel = true);
         } else if (hash === encode && args[0] === config.permission.password) {
-            sender.tell(`§2[§7Deadlock§2]§r You have permission to use Deadlock.`);
+            sender.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
             return (object.cancel = true);
         }
     }
@@ -116,7 +116,7 @@ function command(object: BeforeChatEvent) {
         } catch (error) {}
         // make sure the user has permissions to run the command
         if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
-            sender.tell(`§2[§7Deadlock§2]§r You do not have permission to use this command.`);
+            sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
             return (object.cancel = true);
         }
     }

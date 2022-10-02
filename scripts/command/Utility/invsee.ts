@@ -31,7 +31,7 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
     let inv = member.getComponent("inventory") as EntityInventoryComponent;
     let container = inv.container;
 
-    player.tell(`§2[§7Deadlock§2]§r ${member.name}'s inventory:`);
+    player.tell(`§2[§7Deadlock§2]§f ${member.name}'s inventory:`);
     let i = 0;
     for (; i < container.size; ++i) {
         const item = container.getItem(i);

@@ -25,7 +25,7 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
     }
 
     if (!member) {
-        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§f Couldn't find that player!`);
     }
 
     // There are 30 slots ranging from 0 to 29
@@ -40,5 +40,5 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
             member.runCommand(`replaceitem entity @s slot.enderchest ${slot} air`);
         } catch (ignore) {}
     }
-    return player.tell(`§2[§7Deadlock§2]§r Wiped ${member.name}'s enderchest.`);
+    return player.tell(`§2[§7Deadlock§2]§f Wiped ${member.name}'s enderchest.`);
 }

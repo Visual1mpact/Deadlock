@@ -21,7 +21,7 @@ export function vanish(message: BeforeChatEvent) {
         if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
             player.runCommand(`effect @s clear`);
         }
-        return player.tell(`§2[§7Deadlock§2]§r You are no longer vanished.`);
+        return player.tell(`§2[§7Deadlock§2]§f You are no longer vanished.`);
     }
 
     // Enable
@@ -29,7 +29,7 @@ export function vanish(message: BeforeChatEvent) {
         player.setDynamicProperty("vanish", true);
         player.addTag("vanish");
         player.triggerEvent("vanish");
-        return player.tell(`§2[§7Deadlock§2]§r You are now vanished.`);
+        return player.tell(`§2[§7Deadlock§2]§f You are now vanished.`);
     }
 
     // Did something go wrong? Fix it.
@@ -47,6 +47,6 @@ export function vanish(message: BeforeChatEvent) {
         if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
             player.runCommand(`effect @s clear`);
         }
-        return player.tell(`§2[§7Deadlock§2]§r Something was wrong with vanish. Please try again.`);
+        return player.tell(`§2[§7Deadlock§2]§f Something was wrong with vanish. Please try again.`);
     }
 }

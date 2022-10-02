@@ -14,7 +14,7 @@ function vanish() {
                 player.runCommand(`effect @s clear`);
             }
             player.triggerEvent("unvanish");
-            player.tell(`§2[§7Deadlock§2]§r You had unauthorized permissions for Vanish.`);
+            player.tell(`§2[§7Deadlock§2]§f You had unauthorized permissions for Vanish.`);
             continue;
         }
 

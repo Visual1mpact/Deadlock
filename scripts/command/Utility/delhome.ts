@@ -18,7 +18,7 @@ export function delhome(message: BeforeChatEvent, args: string[]) {
 
     // Don't allow spaces
     if (args.length > 1) {
-        player.tell(`§2[§7Deadlock§2]§r No spaces in names please.`);
+        player.tell(`§2[§7Deadlock§2]§f No spaces in names please.`);
         return void 0;
     }
 
@@ -36,7 +36,7 @@ export function delhome(message: BeforeChatEvent, args: string[]) {
             if (home === homeSetting) {
                 verify = true;
                 player.removeTag(tags[i]);
-                player.tell(`§2[§7Deadlock§2]§r Successfully deleted home '${homeSetting}'.`);
+                player.tell(`§2[§7Deadlock§2]§f Successfully deleted home '${homeSetting}'.`);
                 break;
             }
         }
@@ -44,6 +44,6 @@ export function delhome(message: BeforeChatEvent, args: string[]) {
     if (verify === true) {
         return void 0;
     } else {
-        player.tell(`§2[§7Deadlock§2]§r Home '${homeSetting}' does not exist.`);
+        player.tell(`§2[§7Deadlock§2]§f Home '${homeSetting}' does not exist.`);
     }
 }

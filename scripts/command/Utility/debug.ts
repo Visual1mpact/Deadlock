@@ -14,12 +14,12 @@ export function debug(message: BeforeChatEvent) {
     // Disable
     if (debug) {
         world.setDynamicProperty("debug", false);
-        world.say(`§2[§7Deadlock§2]§r Debug has been turned off by ${player.name}.`);
+        world.say(`§2[§7Deadlock§2]§f Debug has been turned off by ${player.name}.`);
     }
 
     // Enable
     if (!debug) {
         world.setDynamicProperty("debug", true);
-        world.say(`§2[§7Deadlock§2]§r Debug has been turned on by ${player.name}.`);
+        world.say(`§2[§7Deadlock§2]§f Debug has been turned on by ${player.name}.`);
     }
 }

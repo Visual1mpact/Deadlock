@@ -28,12 +28,12 @@ export function punish(message: BeforeChatEvent, args: string[]) {
 
     // Are they online?
     if (!member) {
-        return player.tell(`§2[§7Deadlock§2]§r Couldn't find that player!`);
+        return player.tell(`§2[§7Deadlock§2]§f Couldn't find that player!`);
     }
 
     // Make sure they don't punish themselves
     if (member === player) {
-        return player.tell(`§2[§7Deadlock§2]§r You cannot punish yourself.`);
+        return player.tell(`§2[§7Deadlock§2]§f You cannot punish yourself.`);
     }
 
     // There are 30 slots ranging from 0 to 29
@@ -62,7 +62,7 @@ export function punish(message: BeforeChatEvent, args: string[]) {
         inventory.setItem(i, new ItemStack(MinecraftItemTypes.air, 1));
     }
     // Notify the player that they have been punished.
-    member.tell(`§2[§7Deadlock§2]§r You have been punished for your behavior.`);
+    member.tell(`§2[§7Deadlock§2]§f You have been punished for your behavior.`);
     // Notify the executor that the player has been punished.
-    return player.tell(`§2[§7Deadlock§2]§r ${member.nameTag}§r has been punished.§r`);
+    return player.tell(`§2[§7Deadlock§2]§f ${member.nameTag}§r has been punished.§r`);
 }
