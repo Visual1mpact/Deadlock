@@ -59,11 +59,24 @@ export function sethome(message: BeforeChatEvent, args: string[]) {
     let verify = false;
     let divider: string[] = undefined;
     let tags = player.getTags();
+    const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    const regex = /-/g;
     // Make sure this name doesn't exist already and it doesn't exceed limitations
     let i = tags.length - 1;
     for (; i >= 0; --i) {
         if (tags[i].startsWith("Deadlock-")) {
-            let base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
+            // Check if its a valid base64
+            const valid = base64regex.test(tags[i].replace("Deadlock-", ""));
+            if (!valid) {
+                player.removeTag(tags[i]);
+                continue;
+            }
+            const base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
+            const count = (base64Integrity.match(regex) || []).length;
+            if (count !== 4) {
+                player.removeTag(tags[i]);
+                continue;
+            }
             divider = base64Integrity.split("-");
             const home: string = Base64.decode(divider[0]);
             if (home === homeSetting) {

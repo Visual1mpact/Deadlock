@@ -13,11 +13,24 @@ export function listhome(message: BeforeChatEvent) {
     let divider: string[] = undefined;
     let verify = false;
     let tags = player.getTags();
+    const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    const regex = /-/g;
     player.tell(`§l§2[§7List Of Homes§2]§r`);
     let i = tags.length - 1;
     for (; i >= 0; --i) {
         if (tags[i].startsWith("Deadlock-")) {
+            // Check if its a valid base64
+            const valid = base64regex.test(tags[i].replace("Deadlock-", ""));
+            if (!valid) {
+                player.removeTag(tags[i]);
+                continue;
+            }
             const base64Integrity = Base64.decode(tags[i].replace("Deadlock-", ""));
+            const count = (base64Integrity.match(regex) || []).length;
+            if (count !== 4) {
+                player.removeTag(tags[i]);
+                continue;
+            }
             divider = base64Integrity.split("-");
             const home: string = Base64.decode(divider[0]);
             const px: number = Number(Base64.decode(divider[1]));
