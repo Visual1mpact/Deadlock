@@ -9,6 +9,16 @@
         },
 
         "component_groups": {
+            "scaleupped": {
+                "minecraft:scale": {
+                    "value": 1
+                }
+            },
+            "scaledowned": {
+                "minecraft:scale": {
+                    "value": 0.4
+                }
+            },
             "unvanished": {
                 "minecraft:scale": {
                     "value": 1
@@ -208,6 +218,22 @@
         },
 
         "events": {
+            "scaleup": {
+                "add": {
+                    "component_groups": ["scaleupped"]
+                },
+                "remove": {
+                    "component_groups": ["scaledowned"]
+                }
+            },
+            "scaledown": {
+                "add": {
+                    "component_groups": ["scaledowned"]
+                },
+                "remove": {
+                    "component_groups": ["scaleupped"]
+                }
+            },
             "unvanish": {
                 "add": {
                     "component_groups": ["unvanished"]

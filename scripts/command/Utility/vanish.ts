@@ -14,6 +14,10 @@ export function vanish(message: BeforeChatEvent) {
         player.setDynamicProperty("vanish", false);
         player.removeTag("vanish");
         player.triggerEvent("unvanish");
+        // If tiny is enabled then fix size after unvanishing
+        if (player.getDynamicProperty("tiny") === true) {
+            player.triggerEvent("scaledown");
+        }
         if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
             player.runCommand(`effect @s clear`);
         }
@@ -36,6 +40,10 @@ export function vanish(message: BeforeChatEvent) {
         player.setDynamicProperty("vanish", false);
         player.removeTag("vanish");
         player.triggerEvent("unvanish");
+        // If tiny is enabled then fix size after unvanishing
+        if (player.getDynamicProperty("tiny") === true) {
+            player.triggerEvent("scaledown");
+        }
         if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
             player.runCommand(`effect @s clear`);
         }

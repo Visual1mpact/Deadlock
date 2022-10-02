@@ -30,6 +30,9 @@ function registry(object: WorldInitializeEvent) {
     // Private Prefix
     entityProperty.defineString("privatePrefix", 1);
 
+    // Tiny
+    entityProperty.defineBoolean("tiny");
+
     // Register Defined properties in world globally
     object.propertyRegistry.registerWorldDynamicProperties(worldProperty);
     object.propertyRegistry.registerEntityTypeDynamicProperties(entityProperty, MinecraftEntityTypes.player);
