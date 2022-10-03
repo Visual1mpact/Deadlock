@@ -37,6 +37,11 @@ export function listhome(message: BeforeChatEvent) {
             const py: number = Number(Base64.decode(divider[2]));
             const pz: number = Number(Base64.decode(divider[3]));
             const pd: string = Base64.decode(divider[4]);
+            // Validate strings and numbers
+            if (typeof home !== "string" || isNaN(px) || isNaN(py) || isNaN(pz) || typeof pd !== "string") {
+                player.removeTag(tags[i]);
+                continue;
+            }
             player.tell(` | §2[§f${home}§2]§r §7=>§r ${px} ${py} ${pz} §7<=§r §2[§f${pd}§2]§r`);
             verify = true;
         }

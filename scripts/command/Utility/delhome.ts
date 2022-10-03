@@ -46,6 +46,15 @@ export function delhome(message: BeforeChatEvent, args: string[]) {
             }
             divider = base64Integrity.split("-");
             const home: string = Base64.decode(divider[0]);
+            const px: number = Number(Base64.decode(divider[1]));
+            const py: number = Number(Base64.decode(divider[2]));
+            const pz: number = Number(Base64.decode(divider[3]));
+            const pd: string = Base64.decode(divider[4]);
+            // Validate strings and numbers
+            if (typeof home !== "string" || isNaN(px) || isNaN(py) || isNaN(pz) || typeof pd !== "string") {
+                player.removeTag(tags[i]);
+                continue;
+            }
             if (home === homeSetting) {
                 verify = true;
                 player.removeTag(tags[i]);

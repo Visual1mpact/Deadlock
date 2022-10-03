@@ -100,6 +100,11 @@ export function gohome(message: BeforeChatEvent, args: string[]) {
                     const py: number = Number(Base64.decode(divider[2]));
                     const pz: number = Number(Base64.decode(divider[3]));
                     const pd: string = Base64.decode(divider[4]);
+                    // Validate strings and numbers
+                    if (typeof home !== "string" || isNaN(px) || isNaN(py) || isNaN(pz) || typeof pd !== "string") {
+                        player.removeTag(tags[i]);
+                        continue;
+                    }
                     player.teleport(new Location(px, py, pz), world.getDimension(pd), 0, 0);
                     player.tell(`§2[§7Deadlock§2]§f Welcome back!`);
                     verify = true;
