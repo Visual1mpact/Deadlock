@@ -18,6 +18,7 @@ import { punish } from "./Utility/punish.js";
 import { vanish } from "./Utility/vanish.js";
 import { tiny } from "./Utility/tiny.js";
 import { debug } from "./Utility/debug";
+import { enchant } from "./Utility/enchant";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -36,6 +37,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         vanish: vanish,
         tiny: tiny,
         debug: debug,
+        enchant: enchant,
     },
     null
 );
