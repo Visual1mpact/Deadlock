@@ -51,8 +51,6 @@ export function enchant(message: BeforeChatEvent, args: string[]) {
     const enchantedSlot = enchantmentSlot[itemEnchantments.slot];
     // Is this item allowed to have this enchantment
     const enchantLevel = enchantedSlot[changeCase];
-    // Get properties of this enchantment
-    const enchantData = itemEnchantments.getEnchantment(MinecraftEnchantmentTypes[changeCase]);
     if (!enchantLevel) {
         return player.tell(`§2[§7Deadlock§2]§f ${item.id.replace("minecraft:", "")} doesn't allow ${changeCase}.`);
     }
