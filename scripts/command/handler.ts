@@ -1,6 +1,6 @@
 import { BeforeChatEvent, world } from "mojang-minecraft";
-import { crypto, UUID } from "../util";
-import config from "../data/config";
+import { crypto, UUID } from "../util.js";
+import config from "../data/config.js";
 
 // Import all our commands
 import { give } from "./Utility/give.js";
@@ -17,8 +17,9 @@ import { ecwipe } from "./Utility/ecwipe.js";
 import { punish } from "./Utility/punish.js";
 import { vanish } from "./Utility/vanish.js";
 import { tiny } from "./Utility/tiny.js";
-import { debug } from "./Utility/debug";
-import { enchant } from "./Utility/enchant";
+import { debug } from "./Utility/debug.js";
+import { enchant } from "./Utility/enchant.js";
+import { gamemode } from "./Utility/gamemode.js";
 
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
@@ -38,6 +39,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         tiny: tiny,
         debug: debug,
         enchant: enchant,
+        gamemode: gamemode,
     },
     null
 );
