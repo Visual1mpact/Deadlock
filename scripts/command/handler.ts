@@ -17,6 +17,7 @@ import { tiny } from "./Utility/tiny.js";
 import { debug } from "./Utility/debug.js";
 import { enchant } from "./Utility/enchant.js";
 import { gamemode } from "./Utility/gamemode.js";
+import { parseArgs } from "./../util";
 
 /**
  * @param prefix
@@ -107,7 +108,7 @@ function command(object: BeforeChatEvent) {
     }
 
     // Convert string to an array with a divider
-    const args = message.slice(prefix.length).split(/ +/);
+    const args = parseArgs(message.slice(prefix.length));
 
     // Shift to right of array by one and return string element
     const commandName = args.shift().toLowerCase();
