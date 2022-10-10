@@ -58,11 +58,10 @@ function enchantIntegrityList(player: Player, hand: number) {
     player.tell(`§2[§7Deadlock§2]§f Allowed Enchantments §2(§7${item.id.replace("minecraft:", "")}§2)§r`);
     let verify = false;
     for (enchants in MinecraftEnchantmentTypes) {
-        const changeCase = toCamelCase(enchants);
         // Is this item allowed to have this enchantment
-        const enchantLevel = enchantedSlot[changeCase];
+        const enchantLevel = enchantedSlot[enchants];
         if (enchantLevel) {
-            player.tell(` | §7Type: §2[§f${changeCase.toLowerCase()}§2]§r §7=>§r §7Level: §2[§f${enchantLevel}§2]§r`);
+            player.tell(` | §7Type: §2[§f${enchants}§2]§r §7=>§r §7Level: §2[§f${enchantLevel}§2]§r`);
             verify = true;
         }
     }
