@@ -15,7 +15,7 @@ function usage(prefix: string) {
 §fOPTIONS:
  §2|  §7-h, --help
      §fShows the help menu of this command.
- §2|  §7-r <username>, --reset <username>
+ §2|  §7-r, --reset
      §fRestores the default prefix for a targeted player.
  §2|  §7-s <prefix>, --set <prefix>
      §fSets new prefix for a targeted player.
@@ -57,7 +57,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
     let caseTwo: boolean = false;
     let caseThree: boolean = false;
     let newPrefix: string = undefined;
-    let parameter: string = undefined;
+    let target: string = undefined;
     for (; i >= 0; --i) {
         switch (true) {
             case ["-h", "--help"].includes(args[i]):
@@ -66,14 +66,13 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
                 break;
             case ["-r", "--reset"].includes(args[i]):
                 caseTwo = true;
-                parameter = args[i + 1];
                 break;
             case ["-s", "--set"].includes(args[i]):
                 caseThree = true;
                 newPrefix = args[i + 1];
                 break;
             case ["-t", "--target"].includes(args[i]):
-                parameter = args[i + 1];
+                target = args[i + 1];
                 break;
         }
     }
@@ -81,11 +80,17 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         return;
     }
     if (caseTwo) {
+        /**
+         * Make sure player is targeted using the -t/--target parameter
+         */
+        if (!target) {
+            return player.tell(`§2[§7Deadlock§2]§f You are missing the parameter -t | --target.\n              See ${prefix}prefix -h for more information.`);
+        }
         // try to find the player requested
         let pl: Player = undefined;
         let member: Player = undefined;
         for (pl of world.getPlayers()) {
-            if (pl.nameTag.toLowerCase().includes(parameter.toLowerCase().replace(/"|\\|@/g, ""))) {
+            if (pl.nameTag.toLowerCase().includes(target.toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }
         }
@@ -98,7 +103,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         /**
          * Make sure player is targeted using the -t/--target parameter
          */
-        if (!parameter) {
+        if (!target) {
             return player.tell(`§2[§7Deadlock§2]§f You are missing the parameter -t | --target.\n              See ${prefix}prefix -h for more information.`);
         }
         /**
@@ -111,7 +116,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         let pl: Player = undefined;
         let member: Player = undefined;
         for (pl of world.getPlayers()) {
-            if (pl.nameTag.toLowerCase().includes(parameter.toLowerCase().replace(/"|\\|@/g, ""))) {
+            if (pl.nameTag.toLowerCase().includes(target.toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }
         }

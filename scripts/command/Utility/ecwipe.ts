@@ -51,7 +51,7 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
     let i: number = args.length - 1;
     let caseOne: boolean = false;
     let caseTwo: boolean = false;
-    let parameter: string = undefined;
+    let target: string = undefined;
     for (; i >= 0; --i) {
         switch (true) {
             case ["-h", "--help"].includes(args[i]):
@@ -60,7 +60,7 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
                 break;
             case ["-t", "--target"].includes(args[i]):
                 caseTwo = true;
-                parameter = args[i + 1];
+                target = args[i + 1];
                 break;
         }
     }
@@ -72,7 +72,7 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
         let pl: Player = undefined;
         let member: Player = undefined;
         for (pl of world.getPlayers()) {
-            if (pl.nameTag.toLowerCase().includes(parameter.toLowerCase().replace(/"|\\|@/g, ""))) {
+            if (pl.nameTag.toLowerCase().includes(target.toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
             }
         }
