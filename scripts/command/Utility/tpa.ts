@@ -104,7 +104,7 @@ export function tpa(message: BeforeChatEvent, args: string[]) {
     }
 
     // Let's teleport the player from their location to the other players location
-    memberTwo.teleport(memberOne.location, memberOne.dimension, 0, 0);
+    memberOne.teleport(memberTwo.location, memberTwo.dimension, 0, 0);
     // Let the player know about the teleportation
-    return player.tell(`§2[§7Deadlock§2]§f Teleported ${memberTwo.name} to ${memberOne.name}`);
+    return player.tell(`§2[§7Deadlock§2]§f Teleported ${memberOne.name} to ${memberTwo.name}`);
 }
