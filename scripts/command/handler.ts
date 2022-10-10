@@ -8,10 +8,7 @@ import { op } from "./Moderation/op.js";
 import { prefix } from "./Moderation/prefix.js";
 import { deop } from "./Moderation/deop.js";
 import { tpa } from "./Utility/tpa.js";
-import { sethome } from "./Utility/sethome.js";
-import { delhome } from "./Utility/delhome.js";
-import { gohome } from "./Utility/gohome.js";
-import { listhome } from "./Utility/listhome.js";
+import { home } from "./Utility/home.js";
 import { invsee } from "./Utility/invsee.js";
 import { ecwipe } from "./Utility/ecwipe.js";
 import { punish } from "./Utility/punish.js";
@@ -21,6 +18,55 @@ import { debug } from "./Utility/debug.js";
 import { enchant } from "./Utility/enchant.js";
 import { gamemode } from "./Utility/gamemode.js";
 
+/**
+ * @param prefix
+ * @returns
+ */
+function usage(prefix: string) {
+    const help = `
+§2[§7Deadlock§2]§f USAGE: [prefix][commands] [options]
+
+§fCOMMANDS:
+ §2|  §7${prefix}help
+     §fShows this help menu.
+ §2|  §7${prefix}op [options]
+     §fGrants permission to use Deadlock.
+ §2|  §7${prefix}deop [options]
+     §fRevokes permission to use Deadlock.
+ §2|  §7${prefix}prefix [options]
+     §fSets prefix used for commands.
+ §2|  §7${prefix}give [options]
+     §fGives player an item.
+ §2|  §7${prefix}tpa [options]
+     §fTelports player to another player.
+ §2|  §7${prefix}home [options]
+     §fAdd, delete, list, and teleport to saved locations.
+ §2|  §7${prefix}invsee [options]
+     §fList players inventory.
+ §2|  §7${prefix}ecwipe [options]
+     §fClear players ender chest.
+ §2|  §7${prefix}punish [options]
+     §fClear players ender chest and inventory.
+ §2|  §7${prefix}vanish [options]
+     §fGrants player invisibility.
+ §2|  §7${prefix}tiny [options]
+     §fChange size of the player.
+ §2|  §7${prefix}debug [options]
+     §fDisplay information for debugging.
+ §2|  §7${prefix}enchant [options]
+     §fList allowed enchantments and enchants items.
+ §2|  §7${prefix}gamemode [options]
+     §fChange the game mode of a player.
+
+§fOPTIONS:
+ §2|  §7-h, --help
+     §fShows the help menu of other commands.
+
+`;
+
+    return help;
+}
+
 const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[], fullArgs: string) => void> = Object.setPrototypeOf(
     {
         give: give,
@@ -28,10 +74,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         prefix: prefix,
         deop: deop,
         tpa: tpa,
-        sethome: sethome,
-        delhome: delhome,
-        gohome: gohome,
-        listhome: listhome,
+        home: home,
         invsee: invsee,
         ecwipe: ecwipe,
         punish: punish,
@@ -72,17 +115,6 @@ function command(object: BeforeChatEvent) {
     // Get debug status from player
     const debug = Boolean(world.getDynamicProperty("debug"));
 
-    // Show command and player execution if debug is enabled
-    if (debug) {
-        console.warn(`${new Date()} | "${sender.name}" used the command: ${prefix}${commandName} ${args.join(" ")}`);
-    }
-
-    // Let player know if command does not exist and return
-    if (!(commandName in commandDefinitions)) {
-        sender.tell(`§2[§7Deadlock§2]§f The command ${prefix}${commandName} does not exist. Try again!`);
-        return (object.cancel = true);
-    }
-
     let hash = sender.getDynamicProperty("hash");
     let salt = sender.getDynamicProperty("salt");
     let encode: string = undefined;
@@ -111,6 +143,23 @@ function command(object: BeforeChatEvent) {
             sender.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
             return (object.cancel = true);
         }
+    }
+
+    // Show command and player execution if debug is enabled
+    if (debug) {
+        console.warn(`${new Date()} | "${sender.name}" used the command: ${prefix}${commandName} ${args.join(" ")}`);
+    }
+
+    // Call usage function for help if requested
+    if (commandName.toLowerCase() === "help") {
+        object.cancel = true;
+        return sender.tell(usage(prefix));
+    }
+
+    // Let player know if command does not exist and return
+    if (!(commandName in commandDefinitions)) {
+        object.cancel = true;
+        return sender.tell(`§2[§7Deadlock§2]§f The command ${prefix}${commandName} does not exist.\n              See ${prefix}help for more information.`);
     }
 
     if (commandName !== "op") {

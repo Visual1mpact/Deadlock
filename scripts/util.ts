@@ -47,10 +47,8 @@ export const UUID = (function () {
  * @param {string} str - Takes strings and converts to camelCase
  */
 export function toCamelCase(str: string) {
-    const regExp = /[^a-zA-Z0-9]+(.)/gi;
-    return str.replace(regExp, (match) => {
-        return match[1].toUpperCase();
-    });
+    str = str.toLowerCase().replace(/[-_\s.]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ""));
+    return str.substring(0, 1).toLowerCase() + str.substring(1);
 }
 
 /**

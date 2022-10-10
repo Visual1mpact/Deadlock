@@ -1,4 +1,31 @@
-import { BeforeChatEvent, world } from "mojang-minecraft";
+import { BeforeChatEvent, Player, world } from "mojang-minecraft";
+
+/**
+ * @param prefix
+ * @returns
+ */
+function usage(prefix: string) {
+    const help = `
+§2[§7Deadlock§2]§f USAGE: [prefix][commands] [options]
+
+§fCOMMANDS:
+ §2|  §7${prefix}prefix [options]
+     §fChanges the prefix used for commands.
+
+§fOPTIONS:
+ §2|  §7-h, --help
+     §fShows the help menu of this command.
+ §2|  §7-r <username>, --reset <username>
+     §fRestores the default prefix for a targeted player.
+ §2|  §7-s <prefix>, --set <prefix>
+     §fSets new prefix for a targeted player.
+ §2|  §7-t <username>, --target <username>
+     §fTargets specified player.
+
+`;
+
+    return help;
+}
 
 /**
  * @name prefix
@@ -10,29 +37,96 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
 
     const player = message.sender;
 
+    // Get prefix from player
+    let prefix = String(player.getDynamicProperty("privatePrefix"));
+    if (prefix === "undefined") {
+        prefix = String(world.getDynamicProperty("prefix"));
+    }
+
     // Are there arguements
     if (!args.length) {
-        return void 0;
+        return player.tell(`§2[§7Deadlock§2]§f See ${prefix}prefix -h for command options.`);
     }
 
-    // Check if array contains the string 'reset'
-    let argcheck = args.includes("reset");
-
-    // Reset prefix
-    if (argcheck === true && player.getDynamicProperty("privatePrefix") !== undefined) {
-        player.setDynamicProperty("privatePrefix", world.getDynamicProperty("prefix"));
+    /**
+     * Define variable outside the scope of a loop.
+     * Conditionally check non positional parameters.
+     */
+    let i: number = args.length - 1;
+    let caseOne: boolean = false;
+    let caseTwo: boolean = false;
+    let caseThree: boolean = false;
+    let newPrefix: string = undefined;
+    let parameter: string = undefined;
+    for (; i >= 0; --i) {
+        switch (true) {
+            case ["-h", "--help"].includes(args[i]):
+                caseOne = true;
+                player.tell(usage(prefix));
+                break;
+            case ["-r", "--reset"].includes(args[i]):
+                caseTwo = true;
+                parameter = args[i + 1];
+                break;
+            case ["-s", "--set"].includes(args[i]):
+                caseThree = true;
+                newPrefix = args[i + 1];
+                break;
+            case ["-t", "--target"].includes(args[i]):
+                parameter = args[i + 1];
+                break;
+        }
+    }
+    if (caseOne) {
         return;
     }
-
-    if (args[0][0] == "/") {
-        return player.tell(`§2[§7Deadlock§2]§f Using prefix '/' is not allowed! Please try another one.`);
+    if (caseTwo) {
+        // try to find the player requested
+        let pl: Player = undefined;
+        let member: Player = undefined;
+        for (pl of world.getPlayers()) {
+            if (pl.nameTag.toLowerCase().includes(parameter.toLowerCase().replace(/"|\\|@/g, ""))) {
+                member = pl;
+            }
+        }
+        if (!member) {
+            return player.tell(`§2[§7Deadlock§2]§f Couldn't find the player!`);
+        }
+        return member.setDynamicProperty("privatePrefix", world.getDynamicProperty("prefix"));
     }
-
-    // Change Prefix command under conditions
-    if (args[0].length <= 1 && args[0].length >= 1) {
-        player.tell(`§2[§7Deadlock§2]§f Prefix has been changed to '${args[0]}'.`);
-        return player.setDynamicProperty("privatePrefix", args[0]);
-    } else {
-        player.tell(`§2[§7Deadlock§2]§f Prefix length cannot be more than 1 character.`);
+    if (caseThree) {
+        /**
+         * Make sure player is targeted using the -t/--target parameter
+         */
+        if (!parameter) {
+            return player.tell(`§2[§7Deadlock§2]§f You are missing the parameter -t | --target.\n              See ${prefix}prefix -h for more information.`);
+        }
+        /**
+         * Make sure we are not attempting to set a prefix that can break commands
+         */
+        if (newPrefix === "/") {
+            return player.tell(`§2[§7Deadlock§2]§f Using prefix '/' is not allowed! Please try another one.`);
+        }
+        // try to find the player requested
+        let pl: Player = undefined;
+        let member: Player = undefined;
+        for (pl of world.getPlayers()) {
+            if (pl.nameTag.toLowerCase().includes(parameter.toLowerCase().replace(/"|\\|@/g, ""))) {
+                member = pl;
+            }
+        }
+        if (!member) {
+            return player.tell(`§2[§7Deadlock§2]§f Couldn't find the player!`);
+        }
+        // Change Prefix command under conditions
+        if (newPrefix.length <= 1 && newPrefix.length >= 1) {
+            player.tell(`§2[§7Deadlock§2]§f Prefix has been changed to '${newPrefix}'.`);
+            if (member.name !== player.name) {
+                member.tell(`§2[§7Deadlock§2]§f Prefix has been changed to '${newPrefix}'.`);
+            }
+            return member.setDynamicProperty("privatePrefix", newPrefix);
+        } else {
+            return player.tell(`§2[§7Deadlock§2]§f Prefix cannot be more than 1 character.`);
+        }
     }
 }
