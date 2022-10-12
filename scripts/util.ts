@@ -52,6 +52,32 @@ export function toCamelCase(str: string) {
 }
 
 /**
+ * @name parseArgs
+ * @param {string[]} str - Takes string and parses argument by spaces or quotes
+ */
+export function parseArgs(str) {
+    return [...str.matchAll(/(?<=^| )("?)(.+?)\1(?= |$)/g)].map((match) => match[0].replaceAll('"', ""));
+}
+
+/**
+ * @param {string[]} args
+ * @param {Record<string, Parser>} options
+ */
+export function parseFlags(args: string[], options: Record<string, (args: string[], index: number) => any>) {
+    const flags = Object.create(null);
+    for (let i = 0; i < args.length; i++) {
+        const arg = args[i];
+        console.log(arg);
+        const flag = Object.keys(options).filter((str) => arg === `--${str}` || arg === `-${str[0]}`)[0] ?? false;
+        if (flag) {
+            console.log(flag);
+            flags[flag] = options[flag](args, i);
+        }
+    }
+    return flags;
+}
+
+/**
  * @name titleCase
  * @param {*} s - Takes snakeCase and converts it to titleCase
  * @returns
