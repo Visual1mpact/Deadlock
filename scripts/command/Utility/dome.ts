@@ -20,7 +20,7 @@ function usage(prefix: string) {
      §fSets the radius size (Max is 30).
  §2|  §7-s, --sphere
      §fSets the dome to be a sphere (Hemisphere is default).
- §2|  §7-b, --block
+ §2|  §7-b <block>, --block <block>
      §fSets the block type to use when generating a sphere or hemisphere.
 
 `;
