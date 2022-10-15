@@ -11,7 +11,7 @@ function vanish() {
             // They have been busted!
             player.removeTag("vanish");
             if (player.getEffect(MinecraftEffectTypes.invisibility) !== undefined || player.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
-                player.runCommand(`effect @s clear`);
+                player.runCommandAsync(`effect @s clear`);
             }
             player.triggerEvent("unvanish");
             player.tell(`§2[§7Deadlock§2]§f You had unauthorized permissions for Vanish.`);
@@ -24,7 +24,7 @@ function vanish() {
          */
         player.addEffect(MinecraftEffectTypes.invisibility, 1728000, 255, false);
         player.addEffect(MinecraftEffectTypes.nightVision, 1728000, 255, false);
-        player.runCommand(`title @s actionbar §2---------------\n§7YOU ARE VANISHED§2\n---------------§r`);
+        player.runCommandAsync(`title @s actionbar §2---------------\n§7YOU ARE VANISHED§2\n---------------§r`);
     }
 }
 

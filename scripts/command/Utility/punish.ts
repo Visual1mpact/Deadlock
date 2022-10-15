@@ -100,7 +100,7 @@ export function punish(message: BeforeChatEvent, args: string[]) {
          * are empty or not this ultimately could report unnecessary outputs to the console. We want to ignore.
          */
         try {
-            member.runCommand(`replaceitem entity @s slot.enderchest ${slot} air`);
+            member.runCommandAsync(`replaceitem entity @s slot.enderchest ${slot} air`);
         } catch (ignore) {}
     }
 

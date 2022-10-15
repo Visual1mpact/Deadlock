@@ -110,7 +110,7 @@ export function vanish(message: BeforeChatEvent, args: string[]) {
             member.triggerEvent("scaledown");
         }
         if (member.getEffect(MinecraftEffectTypes.invisibility) !== undefined || member.getEffect(MinecraftEffectTypes.nightVision) !== undefined) {
-            member.runCommand(`effect @s clear`);
+            member.runCommandAsync(`effect @s clear`);
         }
         if (player.name !== member.name) {
             player.tell(`§2[§7Deadlock§2]§f ${member.name} is no longer vanished.`);
