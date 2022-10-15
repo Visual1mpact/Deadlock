@@ -30,8 +30,8 @@ function usage(prefix: string) {
 
 function outerSphere(outerSurface: any, blockType: string, dim: Dimension) {
     let blockCreation = [];
-    for (const coordinates of outerSurface) {
-        blockCreation.push(dim.getBlock(new BlockLocation(coordinates.x, coordinates.y, coordinates.z)));
+    for (const [x, y, z] of outerSurface) {
+        blockCreation.push(dim.getBlock(new BlockLocation(x, y, z)));
     }
     outerSurface = [];
     for (const resurrect of blockCreation) {
@@ -134,7 +134,7 @@ export function dome(message: BeforeChatEvent, args: string[]) {
     const radiusMax2 = radiusMax ** 2,
         radiusMin2 = radiusMin ** 2;
 
-    let outerSurface = [];
+    let outerSurface: [number, number, number][] = [];
     /*
     let innerSurface = [];
     */
@@ -163,7 +163,7 @@ export function dome(message: BeforeChatEvent, args: string[]) {
                 // outer sphere
                 if (radiusMin2 <= dist && dist < radiusMax2) {
                     for (const [x, y, z] of locations) {
-                        outerSurface.push(new Location(cx + x, cy + y, cz + z));
+                        outerSurface.push([cx + x, cy + y, cz + z]);
                         //dim.getBlock(new BlockLocation(cx + x, cy + y, cz + z)).setType(blockType);
                     }
                 }
@@ -172,7 +172,7 @@ export function dome(message: BeforeChatEvent, args: string[]) {
                 else if (radiusMin2 > dist) {
                     for (const [x, y, z] of locations) {
                         let integrity = dim.getBlock(new BlockLocation(cx + x, cy + y, cz + z));
-                        if (integrity.type.id === "minecraft:air") {
+                        if (!integrity) {
                             continue;
                         }
                         integrity.setType(MinecraftBlockTypes["air"]);
