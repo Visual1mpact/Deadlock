@@ -17,6 +17,7 @@ import { tiny } from "./Utility/tiny.js";
 import { debug } from "./Utility/debug.js";
 import { enchant } from "./Utility/enchant.js";
 import { gamemode } from "./Utility/gamemode.js";
+import { dome } from "./Utility/dome.js";
 
 /**
  * @param prefix
@@ -83,6 +84,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         debug: debug,
         enchant: enchant,
         gamemode: gamemode,
+        dome: dome,
     },
     null
 );
