@@ -155,7 +155,7 @@ function command(object: BeforeChatEvent) {
     }
 
     // Call usage function for help if requested
-    if (commandName.toLowerCase() === "help") {
+    if (commandName === "help") {
         object.cancel = true;
         return sender.tell(usage(prefix));
     }

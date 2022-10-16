@@ -86,23 +86,23 @@ export function home(message: BeforeChatEvent, args: string[]) {
     let homeTarget: string = undefined;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-t", "--teleport"].includes(args[i]):
+            case ["-t", "--teleport"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 homeTarget = args[i + 1];
                 break;
-            case ["-a", "--add"].includes(args[i]):
+            case ["-a", "--add"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 homeTarget = args[i + 1];
                 break;
-            case ["-d", "--delete"].includes(args[i]):
+            case ["-d", "--delete"].includes(args[i].toLowerCase()):
                 caseFour = true;
                 homeTarget = args[i + 1];
                 break;
-            case ["-l", "--list"].includes(args[i]):
+            case ["-l", "--list"].includes(args[i].toLowerCase()):
                 caseFive = true;
                 break;
         }

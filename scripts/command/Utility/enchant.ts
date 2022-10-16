@@ -110,23 +110,23 @@ export function enchant(message: BeforeChatEvent, args: string[]) {
     let level: number = undefined;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-t", "--target"].includes(args[i]):
+            case ["-t", "--target"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 target = args[i + 1];
                 break;
-            case ["-e", "--enchant"].includes(args[i]):
+            case ["-e", "--enchant"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 enchantType = args[i + 1];
                 break;
-            case ["-l", "--level"].includes(args[i]):
+            case ["-l", "--level"].includes(args[i].toLowerCase()):
                 caseFour = true;
                 level = Number(args[i + 1]);
                 break;
-            case ["-ll", "--list"].includes(args[i]):
+            case ["-ll", "--list"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 caseThree = true;
                 caseFour = true;

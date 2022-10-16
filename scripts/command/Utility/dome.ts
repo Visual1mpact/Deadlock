@@ -86,18 +86,18 @@ export function dome(message: BeforeChatEvent, args: string[]) {
     let shape: number = undefined;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-r", "--r"].includes(args[i]):
+            case ["-r", "--r"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 radiusMax = args[i + 1] as unknown as number;
                 break;
-            case ["-s", "--sphere"].includes(args[i]):
+            case ["-s", "--sphere"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 break;
-            case ["-b", "--block"].includes(args[i]):
+            case ["-b", "--block"].includes(args[i].toLowerCase()):
                 caseFour = true;
                 blockType = toCamelCase(args[i + 1]);
                 blockType2 = args[i + 1];

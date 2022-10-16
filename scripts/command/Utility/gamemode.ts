@@ -63,21 +63,21 @@ export function gamemode(message: BeforeChatEvent, args: string[]) {
     let target: string = undefined;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-t", "--target"].includes(args[i]):
+            case ["-t", "--target"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 target = args[i + 1];
                 break;
-            case ["-c", "--creative"].includes(args[i]):
+            case ["-c", "--creative"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 break;
-            case ["-s", "--survival"].includes(args[i]):
+            case ["-s", "--survival"].includes(args[i].toLowerCase()):
                 caseFour = true;
                 break;
-            case ["-a", "--adventure"].includes(args[i]):
+            case ["-a", "--adventure"].includes(args[i].toLowerCase()):
                 caseFive = true;
                 break;
         }

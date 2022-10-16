@@ -56,16 +56,16 @@ export function debug(message: BeforeChatEvent, args: string[]) {
     let caseThree: boolean = false;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-d", "--disable"].includes(args[i]):
+            case ["-d", "--disable"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 world.setDynamicProperty("debug", false);
                 world.say(`§2[§7Deadlock§2]§f Debug has been turned off by ${player.name}.`);
                 break;
-            case ["-e", "--enable"].includes(args[i]):
+            case ["-e", "--enable"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 world.setDynamicProperty("debug", true);
                 world.say(`§2[§7Deadlock§2]§f Debug has been turned on by ${player.name}.`);

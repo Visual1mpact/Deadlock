@@ -60,18 +60,18 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
     let target: string = undefined;
     for (; i >= 0; --i) {
         switch (true) {
-            case ["-h", "--help"].includes(args[i]):
+            case ["-h", "--help"].includes(args[i].toLowerCase()):
                 caseOne = true;
                 player.tell(usage(prefix));
                 break;
-            case ["-r", "--reset"].includes(args[i]):
+            case ["-r", "--reset"].includes(args[i].toLowerCase()):
                 caseTwo = true;
                 break;
-            case ["-s", "--set"].includes(args[i]):
+            case ["-s", "--set"].includes(args[i].toLowerCase()):
                 caseThree = true;
                 newPrefix = args[i + 1];
                 break;
-            case ["-t", "--target"].includes(args[i]):
+            case ["-t", "--target"].includes(args[i].toLowerCase()):
                 target = args[i + 1];
                 break;
         }
