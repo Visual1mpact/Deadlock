@@ -18,6 +18,7 @@ import { debug } from "./Utility/debug.js";
 import { enchant } from "./Utility/enchant.js";
 import { gamemode } from "./Utility/gamemode.js";
 import { dome } from "./Utility/dome.js";
+import { listitems } from "./Utility/listitems.js";
 
 /**
  * @param prefix
@@ -60,6 +61,8 @@ function usage(prefix: string) {
      §fChange the game mode of a player.
  §2|  §7${prefix}dome [options]
      §fCreates a sphere or hemisphere around the player.
+ §2|  §7${prefix}listitems [options]
+     §fPrints every item in the game and their max stack according to Gametest.
 
 §fOPTIONS:
  §2|  §7-h, --help
@@ -87,6 +90,7 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         enchant: enchant,
         gamemode: gamemode,
         dome: dome,
+        listitems: listitems,
     },
     null
 );
@@ -152,6 +156,9 @@ function command(object: BeforeChatEvent) {
     // Show command and player execution if debug is enabled
     if (debug) {
         console.warn(`${new Date()} | "${sender.name}" used the command: ${prefix}${commandName} ${args.join(" ")}`);
+    } else if (commandName === "listitems") {
+        sender.tell(`§2[§7Deadlock§2]§f You must enable debugging.`);
+        return (object.cancel = true);
     }
 
     // Call usage function for help if requested
