@@ -58,6 +58,8 @@ function usage(prefix: string) {
      §fList allowed enchantments and enchants items.
  §2|  §7${prefix}gamemode [options]
      §fChange the game mode of a player.
+ §2|  §7${prefix}dome [options]
+     §fCreates a sphere or hemisphere around the player.
 
 §fOPTIONS:
  §2|  §7-h, --help
