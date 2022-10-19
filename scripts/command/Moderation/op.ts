@@ -91,14 +91,17 @@ export function op(message: BeforeChatEvent, args: string[]) {
     // Check for hash/salt and validate password
     let memberHash = member.getDynamicProperty("hash");
     let memberSalt = member.getDynamicProperty("salt");
+    let encode = crypto(memberSalt, config.permission.password) ?? null;
     // If no salt then create one
     if (memberSalt === undefined) {
         member.setDynamicProperty("salt", UUID.generate());
+        // Get generated salt
+        memberSalt = member.getDynamicProperty("salt");
     }
     // If no hash then create one
-    if (memberHash === undefined) {
-        const encode = crypto(memberSalt, config.permission.password);
+    if (memberHash !== encode) {
+        let encode = crypto(memberSalt, config.permission.password);
         member.setDynamicProperty("hash", encode);
     }
-    member.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
+    return member.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
 }

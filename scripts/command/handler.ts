@@ -123,29 +123,31 @@ function command(object: BeforeChatEvent) {
     // Get debug status from player
     const debug = Boolean(world.getDynamicProperty("debug"));
 
+    // Validate if executor has permission
     let hash = sender.getDynamicProperty("hash");
     let salt = sender.getDynamicProperty("salt");
-    let encode: string = undefined;
-    // OP Status
-    if (commandName === "op") {
+    let encode: string = crypto(salt, config.permission.password) ?? null;
+    let op: boolean = false;
+    if (hash === encode && config.permission.password !== "PutPasswordHere") {
+        // Validated
+        op = true;
+    }
+    // OP Status when using password other than default
+    if (commandName === "op" && args[0] === config.permission.password && config.permission.password !== "PutPasswordHere") {
         // If no salt then create one
-        if (salt === undefined && args[0] === config.permission.password) {
+        if (salt === undefined) {
             sender.setDynamicProperty("salt", UUID.generate());
             salt = sender.getDynamicProperty("salt");
         }
         // If no hash then create one
-        if (hash === undefined && args[0] === config.permission.password) {
+        if (hash === undefined) {
             encode = crypto(salt, config.permission.password);
             sender.setDynamicProperty("hash", encode);
             hash = sender.getDynamicProperty("hash");
         } else {
             encode = crypto(salt, config.permission.password);
         }
-        // Make sure the user has permissions to run the command
-        if (hash === undefined || config.permission.password === "PutPasswordHere" || (hash !== encode && args[0] !== config.permission.password)) {
-            sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
-            return (object.cancel = true);
-        } else if (hash === encode && args[0] === config.permission.password) {
+        if (hash === encode) {
             sender.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
             return (object.cancel = true);
         }
@@ -159,26 +161,24 @@ function command(object: BeforeChatEvent) {
         return (object.cancel = true);
     }
 
-    // Let player know if command does not exist and return
-    if (!(commandName in commandDefinitions)) {
+    /**
+     * If they do not have authority then cancel on them
+     */
+    if (!op) {
         object.cancel = true;
-        return sender.tell(`§2[§7Deadlock§2]§f The command ${prefix}${commandName} does not exist.\n              See ${prefix}help for more information.`);
-    }
-
-    if (commandName !== "op") {
-        // Check for hash/salt and validate password
-        encode = crypto(salt, config.permission.password) ?? null;
-        // make sure the user has permissions to run the command
-        if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
-            sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
-            return (object.cancel = true);
-        }
+        return sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
     }
 
     // Call usage function for help if requested
     if (commandName === "help") {
         object.cancel = true;
         return sender.tell(usage(prefix));
+    }
+
+    // Let player know if command does not exist and return
+    if (!(commandName in commandDefinitions)) {
+        object.cancel = true;
+        return sender.tell(`§2[§7Deadlock§2]§f The command ${prefix}${commandName} does not exist.\n              See ${prefix}help for more information.`);
     }
 
     // Command exists so call it and return
