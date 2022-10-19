@@ -139,9 +139,7 @@ function command(object: BeforeChatEvent) {
             sender.setDynamicProperty("hash", encode);
             hash = sender.getDynamicProperty("hash");
         } else {
-            try {
-                encode = crypto(salt, config.permission.password);
-            } catch (error) {}
+            encode = crypto(salt, config.permission.password);
         }
         // Make sure the user has permissions to run the command
         if (hash === undefined || config.permission.password === "PutPasswordHere" || (hash !== encode && args[0] !== config.permission.password)) {
@@ -175,9 +173,7 @@ function command(object: BeforeChatEvent) {
 
     if (commandName !== "op") {
         // Check for hash/salt and validate password
-        try {
-            encode = crypto(salt, config.permission.password);
-        } catch (error) {}
+        encode = crypto(salt, config.permission.password) ?? null;
         // make sure the user has permissions to run the command
         if (hash === undefined || encode !== hash || config.permission.password === "PutPasswordHere") {
             sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);

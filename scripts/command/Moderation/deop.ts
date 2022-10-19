@@ -89,12 +89,9 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     }
 
     // Check for hash/salt and validate password from member
-    let memberHash = member.getDynamicProperty("hash");
-    let memberSalt = member.getDynamicProperty("salt");
-    let memberEncode: string;
-    try {
-        memberEncode = crypto(memberSalt, config.permission.password);
-    } catch (error) {}
+    const memberHash = member.getDynamicProperty("hash");
+    const memberSalt = member.getDynamicProperty("salt");
+    const memberEncode: string = crypto(memberSalt, config.permission.password) ?? null;
 
     if (memberHash !== undefined && memberHash === memberEncode) {
         member.removeDynamicProperty("hash");
