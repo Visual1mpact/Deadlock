@@ -92,6 +92,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         for (pl of world.getPlayers()) {
             if (pl.nameTag.toLowerCase().includes(target.toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
+                break;
             }
         }
         if (!member) {
@@ -118,6 +119,7 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         for (pl of world.getPlayers()) {
             if (pl.nameTag.toLowerCase().includes(target.toLowerCase().replace(/"|\\|@/g, ""))) {
                 member = pl;
+                break;
             }
         }
         if (!member) {
