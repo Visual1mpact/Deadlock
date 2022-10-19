@@ -159,12 +159,6 @@ function command(object: BeforeChatEvent) {
         return (object.cancel = true);
     }
 
-    // Call usage function for help if requested
-    if (commandName === "help") {
-        object.cancel = true;
-        return sender.tell(usage(prefix));
-    }
-
     // Let player know if command does not exist and return
     if (!(commandName in commandDefinitions)) {
         object.cancel = true;
@@ -179,6 +173,12 @@ function command(object: BeforeChatEvent) {
             sender.tell(`§2[§7Deadlock§2]§f You do not have permission to use this command.`);
             return (object.cancel = true);
         }
+    }
+
+    // Call usage function for help if requested
+    if (commandName === "help") {
+        object.cancel = true;
+        return sender.tell(usage(prefix));
     }
 
     // Command exists so call it and return
