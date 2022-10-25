@@ -98,7 +98,8 @@ export function prefix(message: BeforeChatEvent, args: string[]) {
         if (!member) {
             return player.tell(`§2[§7Deadlock§2]§f Couldn't find the player!`);
         }
-        return member.setDynamicProperty("privatePrefix", world.getDynamicProperty("prefix"));
+        member.setDynamicProperty("privatePrefix", world.getDynamicProperty("prefix"));
+        return member.tell(`§2[§7Deadlock§2]§f Prefix has been reset to '${newPrefix}'.`);
     }
     if (caseThree) {
         /**

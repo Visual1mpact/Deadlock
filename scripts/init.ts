@@ -15,9 +15,6 @@ function registry(object: WorldInitializeEvent) {
     // Default Prefix
     worldProperty.defineString("prefix", 1);
 
-    // Debug
-    worldProperty.defineBoolean("debug");
-
     // Vanish
     entityProperty.defineBoolean("vanish");
 
@@ -40,9 +37,6 @@ function registry(object: WorldInitializeEvent) {
     // Verify and set world property if applicable
     if (world.getDynamicProperty("prefix") === undefined) {
         world.setDynamicProperty("prefix", "!");
-    }
-    if (world.getDynamicProperty("debug") === undefined) {
-        world.setDynamicProperty("debug", false);
     }
 }
 

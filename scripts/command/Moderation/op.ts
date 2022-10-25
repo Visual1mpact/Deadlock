@@ -33,7 +33,7 @@ function usage(prefix: string) {
 export function op(message: BeforeChatEvent, args: string[]) {
     message.cancel = true;
 
-    const player = message.sender;
+    let player = message.sender;
 
     let member: Player = undefined;
 

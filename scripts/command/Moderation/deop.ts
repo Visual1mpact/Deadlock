@@ -96,7 +96,9 @@ export function deop(message: BeforeChatEvent, args: string[]) {
     if (memberHash !== undefined && memberHash === memberEncode) {
         member.removeDynamicProperty("hash");
         member.removeDynamicProperty("salt");
-        player.tell(`§2[§7Deadlock§2]§f ${member.name} had permissions removed from Deadlock.`);
+        if (player.name !== member.name) {
+            player.tell(`§2[§7Deadlock§2]§f ${member.name} had permissions removed from Deadlock.`);
+        }
         return member.tell(`§2[§7Deadlock§2]§f Permissions for Deadlock are revoked.`);
     }
     return player.tell(`§2[§7Deadlock§2]§f ${member.name} never had permission to use Deadlock.`);

@@ -93,6 +93,6 @@ export function ecwipe(message: BeforeChatEvent, args: string[]) {
                 member.runCommandAsync(`replaceitem entity @s slot.enderchest ${slot} air`);
             } catch (ignore) {}
         }
-        return player.tell(`§2[§7Deadlock§2]§f Wiped ${member.name}'s enderchest.`);
+        return player.tell(`§2[§7Deadlock§2]§f Wiped ${member.name}'s ender chest.`);
     }
 }

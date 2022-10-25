@@ -14,7 +14,6 @@ import { ecwipe } from "./Utility/ecwipe.js";
 import { punish } from "./Utility/punish.js";
 import { vanish } from "./Utility/vanish.js";
 import { tiny } from "./Utility/tiny.js";
-import { debug } from "./Utility/debug.js";
 import { enchant } from "./Utility/enchant.js";
 import { gamemode } from "./Utility/gamemode.js";
 import { dome } from "./Utility/dome.js";
@@ -53,8 +52,6 @@ function usage(prefix: string) {
      §fGrants player invisibility.
  §2|  §7${prefix}tiny [options]
      §fChange size of the player.
- §2|  §7${prefix}debug [options]
-     §fDisplay information for debugging.
  §2|  §7${prefix}enchant [options]
      §fList allowed enchantments and enchants items.
  §2|  §7${prefix}gamemode [options]
@@ -86,7 +83,6 @@ const commandDefinitions: Record<string, (data: BeforeChatEvent, args: string[],
         punish: punish,
         vanish: vanish,
         tiny: tiny,
-        debug: debug,
         enchant: enchant,
         gamemode: gamemode,
         dome: dome,
@@ -120,9 +116,6 @@ function command(object: BeforeChatEvent) {
     // Shift to right of array by one and return string element
     const commandName = args.shift().toLowerCase();
 
-    // Get debug status from player
-    const debug = Boolean(world.getDynamicProperty("debug"));
-
     // Validate if executor has permission
     let hash = sender.getDynamicProperty("hash");
     let salt = sender.getDynamicProperty("salt");
@@ -151,14 +144,6 @@ function command(object: BeforeChatEvent) {
             sender.tell(`§2[§7Deadlock§2]§f You have permission to use Deadlock.`);
             return (object.cancel = true);
         }
-    }
-
-    // Show command and player execution if debug is enabled
-    if (debug) {
-        console.warn(`${new Date()} | "${sender.name}" used the command: ${prefix}${commandName} ${args.join(" ")}`);
-    } else if (commandName === "listitems") {
-        sender.tell(`§2[§7Deadlock§2]§f You must enable debugging.`);
-        return (object.cancel = true);
     }
 
     /**
