@@ -1,4 +1,4 @@
-import { world, ItemStack, MinecraftItemTypes, Player, BeforeChatEvent, EntityInventoryComponent } from "mojang-minecraft";
+import { world, ItemStack, MinecraftBlockTypes, Player, BeforeChatEvent, EntityInventoryComponent } from "@minecraft/server";
 
 /**
  * @param prefix
@@ -114,7 +114,7 @@ export function punish(message: BeforeChatEvent, args: string[]) {
         if (!inventory_item) {
             continue;
         }
-        inventory.setItem(i2, new ItemStack(MinecraftItemTypes.air, 1));
+        inventory.setItem(i2, new ItemStack(MinecraftBlockTypes.air, 1));
     }
     // Notify the player that they have been punished.
     member.tell(`§2[§7Deadlock§2]§f You have been punished for your behavior.`);

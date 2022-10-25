@@ -1,4 +1,4 @@
-import { world, DynamicPropertiesDefinition, MinecraftEntityTypes, WorldInitializeEvent } from "mojang-minecraft";
+import { world, DynamicPropertiesDefinition, MinecraftEntityTypes, WorldInitializeEvent } from "@minecraft/server";
 
 function registry(object: WorldInitializeEvent) {
     // World instance

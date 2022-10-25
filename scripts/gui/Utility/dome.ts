@@ -1,5 +1,5 @@
-import { BlockLocation, Dimension, MinecraftBlockTypes, Player } from "mojang-minecraft";
-import { ModalFormResponse } from "mojang-minecraft-ui";
+import { BlockLocation, Dimension, MinecraftBlockTypes, Player } from "@minecraft/server";
+import { ModalFormResponse } from "@minecraft/server-ui";
 import { toCamelCase } from "../../util";
 
 function outerSphere(outerSurface: any, blockType: string, dim: Dimension) {

@@ -1,4 +1,4 @@
-import { BeforeChatEvent, Location, world } from "mojang-minecraft";
+import { BeforeChatEvent, Location, world } from "@minecraft/server";
 import { Base64 } from "../../util.js";
 
 let cooldownTimer = new WeakMap();

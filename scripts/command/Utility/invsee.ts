@@ -1,4 +1,4 @@
-import { BeforeChatEvent, EntityInventoryComponent, Player, world } from "mojang-minecraft";
+import { BeforeChatEvent, EntityInventoryComponent, Player, world } from "@minecraft/server";
 
 /**
  * @param prefix
@@ -92,7 +92,7 @@ export function invsee(message: BeforeChatEvent, args: string[]) {
     let i2 = 0;
     for (; i2 < container.size; ++i2) {
         const item = container.getItem(i2);
-        player.tell(` | §fSlot ${i2}§r §7=>§r ${item ? `§2[§f${item.id.replace("minecraft:", "")}§2]§r §7Amount: §7x${item.amount}§r §7=>§r §2[§fData ${item.data}§2]§r` : "§2(§7empty§2)§r"}`);
+        player.tell(` | §fSlot ${i2}§r §7=>§r ${item ? `§2[§f${item.typeId.replace("minecraft:", "")}§2]§r §7Amount: §7x${item.amount}§r §7=>§r §2[§fData ${item.data}§2]§r` : "§2(§7empty§2)§r"}`);
     }
     return void 0;
 }

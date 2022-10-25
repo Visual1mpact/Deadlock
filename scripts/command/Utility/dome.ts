@@ -1,4 +1,4 @@
-import { BeforeChatEvent, BlockLocation, Dimension, Location, MinecraftBlockTypes, world } from "mojang-minecraft";
+import { BeforeChatEvent, BlockLocation, Dimension, Location, MinecraftBlockTypes, world } from "@minecraft/server";
 import { toCamelCase } from "../../util";
 
 /**

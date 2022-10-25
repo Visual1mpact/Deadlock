@@ -1,4 +1,4 @@
-import { BeforeChatEvent, ItemStack, MinecraftItemTypes, Player, world } from "mojang-minecraft";
+import { BeforeChatEvent, ItemStack, MinecraftItemTypes, Player, world } from "@minecraft/server";
 
 /**
  * @param prefix
@@ -58,7 +58,7 @@ export function listitems(message: BeforeChatEvent, args: string[]) {
     for (const item in MinecraftItemTypes) {
         let itemInfo = new ItemStack(MinecraftItemTypes[item]);
         itemInfo.amount = 255;
-        console.log("'" + itemInfo.id + "': " + itemInfo.amount + ",");
+        console.log("'" + itemInfo.typeId + "': " + itemInfo.amount + ",");
     }
     return player.tell(`§2[§7Deadlock§2]§f List completed. Check console logs.`);
 }

@@ -1,4 +1,4 @@
-import { BeforeWatchdogTerminateEvent, system } from "mojang-minecraft";
+import { BeforeWatchdogTerminateEvent, system } from "@minecraft/server";
 
 function watchdog(terminator: BeforeWatchdogTerminateEvent) {
     // Cancel watchdog from shutting down server/realm

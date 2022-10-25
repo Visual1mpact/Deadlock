@@ -1,5 +1,5 @@
-import { Player, world } from "mojang-minecraft";
-import { ModalFormResponse } from "mojang-minecraft-ui";
+import { Player, world } from "@minecraft/server";
+import { ModalFormResponse } from "@minecraft/server-ui";
 
 export function guiPrefix(opResult: ModalFormResponse, onlineList: string[], source: Player) {
     const [dropdown, textField, toggle] = opResult.formValues;

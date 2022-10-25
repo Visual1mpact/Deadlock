@@ -1,4 +1,4 @@
-import { world, BeforeChatEvent, EntityInventoryComponent, ItemEnchantsComponent, MinecraftEnchantmentTypes, Enchantment, Player } from "mojang-minecraft";
+import { world, BeforeChatEvent, EntityInventoryComponent, ItemEnchantsComponent, MinecraftEnchantmentTypes, Enchantment, Player } from "@minecraft/server";
 import { enchantmentSlot } from "../../data/enchantment.js";
 import { toCamelCase } from "../../util.js";
 
@@ -55,7 +55,7 @@ function enchantIntegrityList(player: Player, hand: number) {
     // List of allowed enchantments on item
     const enchantedSlot = enchantmentSlot[itemEnchantments.slot];
     // List items on screen from here
-    player.tell(`§2[§7Deadlock§2]§f Allowed Enchantments §2(§7${item.id.replace("minecraft:", "")}§2)§r`);
+    player.tell(`§2[§7Deadlock§2]§f Allowed Enchantments §2(§7${item.typeId.replace("minecraft:", "")}§2)§r`);
     let verify = false;
     for (enchants in MinecraftEnchantmentTypes) {
         // Is this item allowed to have this enchantment
@@ -197,11 +197,11 @@ export function enchant(message: BeforeChatEvent, args: string[]) {
     // Is this item allowed to have this enchantment
     const enchantLevel = enchantedSlot[changeCase];
     if (!enchantLevel) {
-        return player.tell(`§2[§7Deadlock§2]§f ${item.id.replace("minecraft:", "")} doesn't allow ${changeCase}.`);
+        return player.tell(`§2[§7Deadlock§2]§f ${item.typeId.replace("minecraft:", "")} doesn't allow ${changeCase}.`);
     }
     // Does it exceed level limitations for this enchantment
     if ((enchantLevel && level > enchantLevel) || level < 0) {
-        return player.tell(`§2[§7Deadlock§2]§f ${item.id.replace("minecraft:", "")} doesn't allow ${changeCase} at level ${level}.`);
+        return player.tell(`§2[§7Deadlock§2]§f ${item.typeId.replace("minecraft:", "")} doesn't allow ${changeCase} at level ${level}.`);
     }
     // Add enchantment
     itemEnchantments.addEnchantment(new Enchantment(MinecraftEnchantmentTypes[changeCase], level));

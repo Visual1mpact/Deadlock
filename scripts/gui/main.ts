@@ -1,5 +1,5 @@
-import { BeforeItemUseEvent, Player, world } from "mojang-minecraft";
-import { ActionFormData, ModalFormData } from "mojang-minecraft-ui";
+import { BeforeItemUseEvent, Player, world } from "@minecraft/server";
+import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import config from "../data/config";
 import { crypto } from "../util";
 import { guiDEOP } from "./Moderation/deop";
@@ -23,7 +23,7 @@ function userinterface(data: BeforeItemUseEvent) {
     /**
      * If the player is holding a compass and they "use" it then bring up the main window
      */
-    if (item.id === "minecraft:compass") {
+    if (item.typeId === "minecraft:compass") {
         /**
          * Title and body is self explanatory
          *

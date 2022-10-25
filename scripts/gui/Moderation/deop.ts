@@ -1,5 +1,5 @@
-import { Player, world } from "mojang-minecraft";
-import { ModalFormResponse } from "mojang-minecraft-ui";
+import { Player, world } from "@minecraft/server";
+import { ModalFormResponse } from "@minecraft/server-ui";
 import config from "../../data/config";
 import { crypto } from "../../util";
 

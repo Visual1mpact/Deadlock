@@ -5,9 +5,9 @@
     "description": "A behavior pack tool for Minecraft Bedrock utilizing the Gametest API.",
     "private": true,
     "devDependencies": {
-        "@types/mojang-gametest": "^0.1.6",
-        "@types/mojang-minecraft": "^0.1.7",
-        "@types/mojang-minecraft-ui": "^0.1.0",
+        "@minecraft/server-ui": "^1.0.0-beta.11940b24",
+        "@minecraft/server": "^1.0.0-beta.11940b24",
+        "@minecraft/server-gametest": "^1.0.0-beta.11940b24",
         "prettier": "^2.7.1",
         "typescript": "^4.7.4"
     },

@@ -1,4 +1,4 @@
-import { BeforeChatEvent, MinecraftEffectTypes, Player, world } from "mojang-minecraft";
+import { BeforeChatEvent, MinecraftEffectTypes, Player, world } from "@minecraft/server";
 
 /**
  * @param prefix

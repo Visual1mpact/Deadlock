@@ -1,4 +1,4 @@
-import { world, MinecraftEffectTypes, Player } from "mojang-minecraft";
+import { world, MinecraftEffectTypes, Player } from "@minecraft/server";
 
 function vanish() {
     // Filter for only players who are vanished

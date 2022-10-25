@@ -1,4 +1,4 @@
-import { BeforeChatEvent, EntityInventoryComponent, Player, world, MinecraftItemTypes, ItemStack } from "mojang-minecraft";
+import { BeforeChatEvent, EntityInventoryComponent, Player, world, MinecraftItemTypes, ItemStack } from "@minecraft/server";
 import maxItemStack, { defaultMaxItemStack } from "../../data/maxstack.js";
 import { toCamelCase } from "../../util.js";
 
