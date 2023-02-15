@@ -5,7 +5,7 @@
         "description": "A behavior pack tool for Minecraft Bedrock utilizing the Gametest API ~ v1.0.0",
         "uuid": "3de056b2-3a44-4502-ad87-40443316fe47",
         "version": [1, 0, 0],
-        "min_engine_version": [1, 19, 30]
+        "min_engine_version": [1, 19, 60]
     },
     "metadata": {
         "authors": ["Visual1mpact"],
@@ -30,7 +30,7 @@
     "dependencies": [
         {
             "module_name": "@minecraft/server",
-            "version": "1.0.0-beta"
+            "version": "1.1.0-beta"
         },
         {
             "module_name": "@minecraft/server-gametest",
