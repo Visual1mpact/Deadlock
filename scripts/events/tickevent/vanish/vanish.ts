@@ -7,7 +7,7 @@ function vanish() {
         /**
          * They have the tag but does it match with the boolean?
          */
-        let vanishProp = player.getDynamicProperty("vanish");
+        const vanishProp = player.getDynamicProperty("vanish");
         if (vanishProp === false || vanishProp === undefined) {
             // They have been busted!
             player.removeTag("vanish");
