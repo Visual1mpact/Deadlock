@@ -7,6 +7,6 @@ import { UserInterface } from "./gui/main.js";
 WatchDog();
 Init();
 Handler();
-Vanish();
+Vanish;
 // GUI
 UserInterface();

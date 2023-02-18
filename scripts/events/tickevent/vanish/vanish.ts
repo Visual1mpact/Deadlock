@@ -1,4 +1,4 @@
-import { world, MinecraftEffectTypes, Player } from "@minecraft/server";
+import { world, MinecraftEffectTypes, Player, system } from "@minecraft/server";
 
 function vanish() {
     // Filter for only players who are vanished
@@ -29,6 +29,8 @@ function vanish() {
     }
 }
 
-export const Vanish = () => {
-    world.events.tick.subscribe(vanish);
-};
+const TICKS_IN_SEC = 20;
+
+export const Vanish = system.runSchedule(() => {
+    vanish();
+}, TICKS_IN_SEC);
